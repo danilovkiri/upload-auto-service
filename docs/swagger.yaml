@@ -1,0 +1,90 @@
+definitions:
+  modeldto.ResponseProcessingStatus:
+    properties:
+      current_status:
+        example: done
+        type: string
+    type: object
+  modeldto.ResponseProductCode:
+    properties:
+      product_code:
+        example: upload_23andme_v5_b2c_array_txt
+        type: string
+    type: object
+info:
+  contact:
+    email: danilov@atlasbiomed.com
+    name: Kirill Danilov
+  title: Upload Auto Service REST API
+paths:
+  /api/v1/product/{userID}:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      operationId: getProductCode
+      parameters:
+      - description: User ID to get product code for
+        in: path
+        name: userID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/modeldto.ResponseProductCode'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "417":
+          description: Expectation Failed
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get product code request
+  /api/v1/status/{userID}:
+    get:
+      consumes:
+      - application/x-www-form-urlencoded
+      operationId: getProcessingStatus
+      parameters:
+      - description: User ID to get status for
+        in: path
+        name: userID
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/modeldto.ResponseProcessingStatus'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "404":
+          description: Not Found
+          schema:
+            type: string
+        "417":
+          description: Expectation Failed
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Get processing status request
+swagger: "2.0"
